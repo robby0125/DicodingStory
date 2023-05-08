@@ -65,6 +65,11 @@ dependencies {
     // DataStore
     implementation "androidx.datastore:datastore-preferences:$datastore_version"
 
+    // CameraX
+    implementation "androidx.camera:camera-camera2:$camerax_version"
+    implementation "androidx.camera:camera-lifecycle:$camerax_version"
+    implementation "androidx.camera:camera-view:$camerax_version"
+
     // UI
     implementation 'de.hdodenhof:circleimageview:3.1.0'
     implementation 'com.github.bumptech.glide:glide:4.15.1'

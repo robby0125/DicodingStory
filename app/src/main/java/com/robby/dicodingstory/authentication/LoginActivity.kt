@@ -33,8 +33,8 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener {
                 authViewModel.login(email, password).observe(this) {
                     when (it) {
                         is Resource.Success -> {
-                            val intent = Intent(this, HomeActivity::class.java)
-                            startActivity(intent)
+                            val homeIntent = Intent(this, HomeActivity::class.java)
+                            startActivity(homeIntent)
                             finish()
                         }
                         is Resource.Loading -> {}

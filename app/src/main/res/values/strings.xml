@@ -1,5 +1,14 @@
 <resources>
     <string name="app_name">DicodingStory</string>
+    <string name="home_title">Dicoding Story</string>
     <string name="login">Login</string>
     <string name="register">Register</string>
+    <string name="logout">Logout</string>
+    <string name="logout_confirmation">Are you sure want to logout?</string>
+    <string name="add_story">Add story</string>
+    <string name="add_new_story">Add new story</string>
+    <string name="yes">Yes</string>
+    <string name="no">No</string>
+    <string name="upload_story">Upload story</string>
+    <string name="add_story_description">Add story description</string>
 </resources>

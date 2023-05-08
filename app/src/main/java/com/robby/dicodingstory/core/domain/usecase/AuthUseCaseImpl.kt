@@ -13,4 +13,6 @@ class AuthUseCaseImpl(private val repository: AuthRepository) : AuthUseCase {
         repository.register(name, email, password)
 
     override fun isLogin(): Flow<Boolean> = repository.isLogin()
+
+    override fun logout(): Flow<Nothing> = repository.logout()
 }

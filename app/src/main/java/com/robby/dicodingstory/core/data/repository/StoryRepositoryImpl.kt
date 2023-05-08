@@ -10,6 +10,11 @@ import com.robby.dicodingstory.core.utils.Resource
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.flow
+import okhttp3.MediaType.Companion.toMediaType
+import okhttp3.MultipartBody
+import okhttp3.RequestBody.Companion.asRequestBody
+import okhttp3.RequestBody.Companion.toRequestBody
+import java.io.File
 
 class StoryRepositoryImpl(
     private val apiService: ApiService,
@@ -32,6 +37,53 @@ class StoryRepositoryImpl(
         } catch (e: Exception) {
             emit(Resource.Error(e.toString()))
             Log.d(TAG, "getAllStories: $e")
+        }
+    }
+
+    override fun getDetailStory(id: String): Flow<Resource<Story>> = flow {
+        emit(Resource.Loading())
+
+        try {
+            val token = sessionManager.getUserToken().first()
+            val response = apiService.getDetailStory("Bearer $token", id)
+
+            if (!response.error) {
+                val story = DataMapper.mapStoryResponseToModel(response.story)
+                emit(Resource.Success(story))
+            } else {
+                emit(Resource.Error(response.message))
+                Log.d(TAG, "getDetailStory: ${response.message}")
+            }
+        } catch (e: Exception) {
+            emit(Resource.Error(e.toString()))
+            Log.d(TAG, "getDetailStory: $e")
+        }
+    }
+
+    override fun addStory(photo: File, description: String): Flow<Resource<Boolean>> = flow {
+        emit(Resource.Loading())
+
+        try {
+            val requestDescription = description.toRequestBody("text/plain".toMediaType())
+            val requestPhoto = photo.asRequestBody("image/jpeg".toMediaType())
+            val imageMultipart = MultipartBody.Part.createFormData(
+                "photo",
+                photo.name,
+                requestPhoto
+            )
+
+            val token = sessionManager.getUserToken().first()
+            val response = apiService.addStory("Bearer $token", imageMultipart, requestDescription)
+
+            if (!response.error) {
+                emit(Resource.Success(true))
+            } else {
+                emit(Resource.Error(response.message))
+                Log.d(TAG, "addStory: ${response.message}")
+            }
+        } catch (e: Exception) {
+            emit(Resource.Error(e.toString()))
+            Log.d(TAG, "addStory: $e")
         }
     }
 

@@ -7,9 +7,10 @@ import com.robby.dicodingstory.core.domain.model.User
 import com.robby.dicodingstory.core.domain.repository.AuthRepository
 import com.robby.dicodingstory.core.utils.DataMapper
 import com.robby.dicodingstory.core.utils.Resource
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.flow
+import kotlinx.coroutines.flow.flowOn
 
 class AuthRepositoryImpl(
     private val apiService: ApiService,
@@ -59,6 +60,10 @@ class AuthRepositoryImpl(
         }
 
     override fun isLogin(): Flow<Boolean> = sessionManager.isLogin()
+
+    override fun logout(): Flow<Nothing> = flow {
+        sessionManager.clearLoginSession()
+    }
 
     companion object {
         private const val TAG = "AuthRepositoryImpl"

@@ -3,20 +3,21 @@ package com.robby.dicodingstory.home.adapter
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.bumptech.glide.load.resource.bitmap.CenterCrop
-import com.bumptech.glide.load.resource.bitmap.RoundedCorners
-import com.bumptech.glide.request.RequestOptions
-import com.robby.dicodingstory.R
 import com.robby.dicodingstory.core.domain.model.Story
 import com.robby.dicodingstory.databinding.StoryItemBinding
 import com.robby.dicodingstory.utils.loadImageFromUrl
 
 class ListStoryAdapter : RecyclerView.Adapter<ListStoryAdapter.ViewHolder>() {
     private val listStory = ArrayList<Story>()
+    private var onClick: OnStoryItemClickListener? = null
 
     fun setData(listStory: List<Story>) {
         this.listStory.clear()
         this.listStory.addAll(listStory)
+    }
+
+    fun setOnStoryItemClickListener(onClick: OnStoryItemClickListener) {
+        this.onClick = onClick
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ListStoryAdapter.ViewHolder {
@@ -35,13 +36,14 @@ class ListStoryAdapter : RecyclerView.Adapter<ListStoryAdapter.ViewHolder>() {
         fun bind(story: Story) {
             with(binding) {
                 tvUserName.text = story.name
+                imgStory.loadImageFromUrl(story.photoUrl)
 
-                val roundedCorner =
-                    root.resources.getDimensionPixelSize(R.dimen.cardCornerRadius) / 2
-                val options =
-                    RequestOptions().transform(CenterCrop(), RoundedCorners(roundedCorner))
-                imgStory.loadImageFromUrl(story.photoUrl, options)
+                root.setOnClickListener { onClick?.onStoryClick(story) }
             }
         }
+    }
+
+    interface OnStoryItemClickListener {
+        fun onStoryClick(story: Story)
     }
 }

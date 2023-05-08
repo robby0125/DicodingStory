@@ -1,4 +1,4 @@
-package com.robby.dicodingstory.home
+package com.robby.dicodingstory.detail
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
@@ -7,6 +7,7 @@ import com.robby.dicodingstory.core.domain.model.Story
 import com.robby.dicodingstory.core.domain.usecase.StoryUseCase
 import com.robby.dicodingstory.core.utils.Resource
 
-class HomeViewModel(private val storyUseCase: StoryUseCase) : ViewModel() {
-    fun getAllStories(): LiveData<Resource<List<Story>>> = storyUseCase.getAllStories().asLiveData()
+class DetailViewModel(private val storyUseCase: StoryUseCase) : ViewModel() {
+    fun getDetailStory(id: String): LiveData<Resource<Story>> =
+        storyUseCase.getDetailStory(id).asLiveData()
 }
