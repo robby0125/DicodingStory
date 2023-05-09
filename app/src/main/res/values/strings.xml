@@ -1,6 +1,6 @@
 <resources>
-    <string name="app_name">DicodingStory</string>
-    <string name="home_title">Dicoding Story</string>
+    <string name="app_name">Dicoding Story</string>
+    <string name="detail_title">Story Detail</string>
     <string name="login">Login</string>
     <string name="register">Register</string>
     <string name="logout">Logout</string>
@@ -11,4 +11,26 @@
     <string name="no">No</string>
     <string name="upload_story">Upload story</string>
     <string name="add_story_description">Add story description</string>
+    <string name="hello">Hello!</string>
+    <string name="subtitle_login">Please login to continue your journey!</string>
+    <string name="register_title">Create an account</string>
+    <string name="something_wrong">Something Wrong!</string>
+    <string name="error_default_message">Error without message</string>
+    <string name="empty">Nothing to show!</string>
+    <string name="login_process">Login process…</string>
+    <string name="register_process">Register process…</string>
+    <string name="upload_process">Uploading story…</string>
+    <string name="capture_process">Capturing photo…</string>
+    <string name="picture_of_story">Picture of Story</string>
+    <string name="rotate_camera">Rotate camera</string>
+    <string name="open_gallery">Open gallery</string>
+    <string name="capture_photo">Capture photo</string>
+    <string name="enter_your_email">Enter your email</string>
+    <string name="enter_your_password">Enter your password</string>
+    <string name="picture_of_paper_plane">Picture of paper plane</string>
+    <string name="enter_your_name">Enter your name</string>
+    <string name="picture_story_from">Picture of story from %s</string>
+    <string name="password_error_message">Password must be at least 8 characters long.</string>
+    <string name="email_error_message">Please enter a valid email address.</string>
+    <string name="name_error_message">Please enter a valid name.</string>
 </resources>

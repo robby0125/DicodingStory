@@ -6,47 +6,99 @@
     android:layout_height="match_parent"
     tools:context=".authentication.RegisterActivity">
 
-    <EditText
-        android:id="@+id/ed_register_name"
-        android:layout_width="match_parent"
+    <TextView
+        android:id="@+id/tv_register_title"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="16dp"
-        android:inputType="textPersonName"
-        android:lines="1"
+        android:alpha="0"
+        android:text="@string/register_title"
+        android:textColor="@color/black"
+        android:textSize="24sp"
+        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        tools:alpha="1" />
 
-    <EditText
+    <com.robby.dicodingstory.customview.MyEditText
+        android:id="@+id/ed_register_name"
+        android:layout_width="0dp"
+        android:layout_height="48dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        android:alpha="0"
+        android:autofillHints="name"
+        android:background="@drawable/my_edit_text_background"
+        android:drawableStart="@drawable/person_icon"
+        android:drawablePadding="16dp"
+        android:hint="@string/enter_your_name"
+        android:inputType="textPersonName"
+        android:lines="1"
+        android:paddingStart="16dp"
+        android:paddingEnd="12dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_register_title"
+        tools:alpha="1"
+        tools:ignore="TextContrastCheck,VisualLintTextFieldSize" />
+
+    <com.robby.dicodingstory.customview.MyEditText
         android:id="@+id/ed_register_email"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_height="48dp"
         android:layout_marginTop="16dp"
+        android:alpha="0"
+        android:autofillHints="emailAddress"
+        android:background="@drawable/my_edit_text_background"
+        android:drawableStart="@drawable/email_icon"
+        android:drawablePadding="16dp"
+        android:hint="@string/enter_your_email"
         android:inputType="textEmailAddress"
         android:lines="1"
+        android:paddingStart="16dp"
+        android:paddingEnd="12dp"
         app:layout_constraintEnd_toEndOf="@+id/ed_register_name"
         app:layout_constraintStart_toStartOf="@+id/ed_register_name"
-        app:layout_constraintTop_toBottomOf="@+id/ed_register_name" />
+        app:layout_constraintTop_toBottomOf="@+id/ed_register_name"
+        tools:alpha="1"
+        tools:ignore="TextContrastCheck,VisualLintTextFieldSize" />
 
-    <EditText
+    <com.robby.dicodingstory.customview.MyEditText
         android:id="@+id/ed_register_password"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_height="48dp"
         android:layout_marginTop="16dp"
+        android:alpha="0"
+        android:autofillHints="password"
+        android:background="@drawable/my_edit_text_background"
+        android:drawableStart="@drawable/lock_icon"
+        android:drawablePadding="16dp"
+        android:hint="@string/enter_your_password"
+        android:inputType="textPassword"
+        android:lines="1"
+        android:paddingStart="16dp"
+        android:paddingEnd="12dp"
         app:layout_constraintEnd_toEndOf="@+id/ed_register_email"
         app:layout_constraintStart_toStartOf="@+id/ed_register_email"
-        app:layout_constraintTop_toBottomOf="@+id/ed_register_email" />
+        app:layout_constraintTop_toBottomOf="@+id/ed_register_email"
+        tools:alpha="1"
+        tools:ignore="TextContrastCheck,VisualLintTextFieldSize" />
 
     <Button
         android:id="@+id/btn_register"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_height="56dp"
         android:layout_marginTop="16dp"
+        android:alpha="0"
         android:text="@string/register"
         app:layout_constraintEnd_toEndOf="@+id/ed_register_password"
         app:layout_constraintStart_toStartOf="@+id/ed_register_password"
-        app:layout_constraintTop_toBottomOf="@+id/ed_register_password" />
+        app:layout_constraintTop_toBottomOf="@+id/ed_register_password"
+        tools:alpha="1"
+        tools:ignore="VisualLintButtonSize" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

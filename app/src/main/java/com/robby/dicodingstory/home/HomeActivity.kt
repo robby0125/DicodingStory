@@ -4,14 +4,14 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
-import android.widget.Toast
+import android.view.View
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.robby.dicodingstory.R
+import com.robby.dicodingstory.addstory.CameraActivity
 import com.robby.dicodingstory.authentication.AuthViewModel
 import com.robby.dicodingstory.authentication.LoginActivity
-import com.robby.dicodingstory.addstory.CameraActivity
 import com.robby.dicodingstory.core.domain.model.Story
 import com.robby.dicodingstory.core.utils.Resource
 import com.robby.dicodingstory.databinding.ActivityHomeBinding
@@ -30,19 +30,31 @@ class HomeActivity : AppCompatActivity(), ListStoryAdapter.OnStoryItemClickListe
         binding = ActivityHomeBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        supportActionBar?.title = getString(R.string.home_title)
+        supportActionBar?.title = getString(R.string.app_name)
 
         with(binding.rvStories) {
             layoutManager = LinearLayoutManager(this@HomeActivity)
             setHasFixedSize(true)
         }
 
+        binding.rvStories.visibility = View.INVISIBLE
+        binding.error.root.visibility = View.INVISIBLE
+        binding.progressBar.visibility = View.INVISIBLE
+
         homeViewModel.getAllStories().observe(this) {
             when (it) {
-                is Resource.Success -> populateStories(it.data)
-                is Resource.Loading -> {}
+                is Resource.Success -> {
+                    showLoading(false)
+                    populateStories(it.data)
+                }
+
+                is Resource.Loading -> {
+                    showLoading(true)
+                }
+
                 is Resource.Error -> {
-                    Toast.makeText(this@HomeActivity, "Error loading data: ${it.message}", Toast.LENGTH_LONG).show()
+                    showLoading(false)
+                    showError(it.message ?: getString(R.string.error_default_message))
                 }
             }
         }
@@ -75,12 +87,13 @@ class HomeActivity : AppCompatActivity(), ListStoryAdapter.OnStoryItemClickListe
 
     private fun populateStories(stories: List<Story>?) {
         if (stories.isNullOrEmpty()) {
-            // TODO : Do something when stories is empty or null
+            showError(getString(R.string.empty))
         } else {
             val adapter = ListStoryAdapter()
             adapter.setData(stories)
             adapter.setOnStoryItemClickListener(this)
 
+            binding.rvStories.visibility = View.VISIBLE
             binding.rvStories.adapter = adapter
         }
     }
@@ -103,5 +116,14 @@ class HomeActivity : AppCompatActivity(), ListStoryAdapter.OnStoryItemClickListe
 
         val dialog = builder.create()
         dialog.show()
+    }
+
+    private fun showLoading(isLoading: Boolean) {
+        binding.progressBar.visibility = if (isLoading) View.VISIBLE else View.INVISIBLE
+    }
+
+    private fun showError(message: String) {
+        binding.error.root.visibility = View.VISIBLE
+        binding.error.tvErrorMessage.text = message.trim()
     }
 }

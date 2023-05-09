@@ -19,10 +19,13 @@ import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import com.robby.dicodingstory.R
 import com.robby.dicodingstory.databinding.ActivityCameraBinding
+import com.robby.dicodingstory.fragment.LoadingDialogFragment
 import com.robby.dicodingstory.utils.Helper
 
 class CameraActivity : AppCompatActivity(), View.OnClickListener {
     private lateinit var binding: ActivityCameraBinding
+    private lateinit var loadingDialog: LoadingDialogFragment
+
     private var imageCapture: ImageCapture? = null
     private var cameraSelector = CameraSelector.DEFAULT_BACK_CAMERA
 
@@ -48,6 +51,8 @@ class CameraActivity : AppCompatActivity(), View.OnClickListener {
         setContentView(binding.root)
 
         supportActionBar?.hide()
+
+        loadingDialog = LoadingDialogFragment()
 
         if (!allPermissionGranted()) {
             ActivityCompat.requestPermissions(this, REQUIRED_PERMISSIONS, REQUEST_CODE_PERMISSION)
@@ -123,6 +128,15 @@ class CameraActivity : AppCompatActivity(), View.OnClickListener {
             val photoFile = Helper.createFile(application)
             val outputOptions = ImageCapture.OutputFileOptions.Builder(photoFile).build()
 
+            val bundle = Bundle()
+            bundle.putString(
+                LoadingDialogFragment.EXTRA_LOADING_MESSAGE,
+                getString(R.string.capture_process)
+            )
+
+            loadingDialog.arguments = bundle
+            loadingDialog.show(supportFragmentManager, "Loading Dialog")
+
             it.takePicture(
                 outputOptions,
                 ContextCompat.getMainExecutor(this),
@@ -134,12 +148,15 @@ class CameraActivity : AppCompatActivity(), View.OnClickListener {
                         val reducedFile = Helper.reduceFileImage(photoFile)
                         Log.d("Helper", "onImageSaved: ${reducedFile.length()}")
 
+                        loadingDialog.dismiss()
+
                         val intent = Intent(this@CameraActivity, AddStoryActivity::class.java)
                         intent.putExtra(AddStoryActivity.EXTRA_IMAGE, reducedFile)
                         startActivity(intent)
                     }
 
                     override fun onError(exception: ImageCaptureException) {
+                        loadingDialog.dismiss()
                         Toast.makeText(
                             this@CameraActivity,
                             "Error when taking picture.",

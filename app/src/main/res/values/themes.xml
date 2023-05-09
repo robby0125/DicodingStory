@@ -8,6 +8,7 @@
         <item name="colorSecondary">@color/space_blue</item>
         <item name="colorSecondaryVariant">@color/purple</item>
         <item name="colorOnSecondary">@color/white</item>
+        <item name="colorOnSurface">?attr/colorPrimary</item>
         <item name="android:statusBarColor">?attr/colorPrimaryVariant</item>
     </style>
 

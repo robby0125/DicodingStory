@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Cerita Dicoding</string>
+    <string name="detail_title">Detail Cerita</string>
+    <string name="login">Masuk</string>
+    <string name="register">Daftar</string>
+    <string name="logout">Keluar</string>
+    <string name="logout_confirmation">Anda yakin ingin keluar?</string>
+    <string name="add_story">Tambah cerita</string>
+    <string name="add_new_story">Tambah cerita baru</string>
+    <string name="yes">Ya</string>
+    <string name="no">Tidak</string>
+    <string name="upload_story">Unggah cerita</string>
+    <string name="add_story_description">Tambahkan deskripsi cerita</string>
+    <string name="hello">Halo!</string>
+    <string name="subtitle_login">Silakan masuk untuk melanjutkan perjalanan Anda!</string>
+    <string name="register_title">Buat akun</string>
+    <string name="something_wrong">Ada Kesalahan!</string>
+    <string name="error_default_message">Terjadi kesalahan tanpa pesan</string>
+    <string name="empty">Tidak ada yang ditampilkan!</string>
+    <string name="login_process">Proses masuk…</string>
+    <string name="register_process">Proses mendaftar…</string>
+    <string name="upload_process">Mengunggah cerita…</string>
+    <string name="capture_process">Mengambil foto…</string>
+    <string name="picture_of_story">Gambar Cerita</string>
+    <string name="rotate_camera">Putar kamera</string>
+    <string name="open_gallery">Buka galeri</string>
+    <string name="capture_photo">Ambil foto</string>
+    <string name="enter_your_email">Masukkan email Anda</string>
+    <string name="enter_your_password">Masukkan kata sandi Anda</string>
+    <string name="picture_of_paper_plane">Gambar pesawat kertas</string>
+    <string name="enter_your_name">Masukkan nama Anda</string>
+    <string name="picture_story_from">Gambar cerita dari %s</string>
+    <string name="password_error_message">Kata sandi harus terdiri dari minimal 8 karakter.</string>
+    <string name="email_error_message">Silakan masukkan alamat email yang valid.</string>
+    <string name="name_error_message">Silakan masukkan nama yang valid.</string>
+</resources>

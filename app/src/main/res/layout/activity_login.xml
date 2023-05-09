@@ -6,48 +6,102 @@
     android:layout_height="match_parent"
     tools:context=".authentication.LoginActivity">
 
-    <EditText
-        android:id="@+id/ed_login_email"
-        android:layout_width="match_parent"
+    <TextView
+        android:id="@+id/tv_title_login"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
         android:layout_marginTop="8dp"
-        android:layout_marginEnd="16dp"
-        android:inputType="textEmailAddress"
-        android:lines="1"
+        android:alpha="0"
+        android:text="@string/hello"
+        android:textColor="@color/black"
+        android:textSize="40sp"
+        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        tools:alpha="1" />
 
-    <EditText
+    <TextView
+        android:id="@+id/tv_subtitle_login"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:alpha="0"
+        android:text="@string/subtitle_login"
+        android:textColor="@color/black"
+        app:layout_constraintEnd_toEndOf="@+id/tv_title_login"
+        app:layout_constraintStart_toStartOf="@+id/tv_title_login"
+        app:layout_constraintTop_toBottomOf="@+id/tv_title_login"
+        tools:alpha="1" />
+
+    <com.robby.dicodingstory.customview.MyEditText
+        android:id="@+id/ed_login_email"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        android:alpha="0"
+        android:autofillHints="emailAddress"
+        android:background="@drawable/my_edit_text_background"
+        android:drawableStart="@drawable/email_icon"
+        android:drawablePadding="16dp"
+        android:hint="@string/enter_your_email"
+        android:inputType="textEmailAddress"
+        android:lines="1"
+        android:paddingStart="16dp"
+        android:paddingEnd="12dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_subtitle_login"
+        tools:alpha="1"
+        tools:ignore="TextContrastCheck,VisualLintTextFieldSize" />
+
+    <com.robby.dicodingstory.customview.MyEditText
         android:id="@+id/ed_login_password"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_height="48dp"
         android:layout_marginTop="16dp"
+        android:alpha="0"
+        android:autofillHints="password"
+        android:background="@drawable/my_edit_text_background"
+        android:drawableStart="@drawable/lock_icon"
+        android:drawablePadding="16dp"
+        android:hint="@string/enter_your_password"
         android:inputType="textPassword"
         android:lines="1"
+        android:paddingStart="16dp"
+        android:paddingEnd="12dp"
         app:layout_constraintEnd_toEndOf="@+id/ed_login_email"
         app:layout_constraintStart_toStartOf="@+id/ed_login_email"
-        app:layout_constraintTop_toBottomOf="@+id/ed_login_email" />
+        app:layout_constraintTop_toBottomOf="@+id/ed_login_email"
+        tools:alpha="1"
+        tools:ignore="TextContrastCheck,VisualLintTextFieldSize" />
 
     <Button
         android:id="@+id/btn_login"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_height="56dp"
         android:layout_marginTop="16dp"
+        android:alpha="0"
         android:text="@string/login"
         app:layout_constraintEnd_toEndOf="@+id/ed_login_password"
         app:layout_constraintStart_toStartOf="@+id/ed_login_password"
-        app:layout_constraintTop_toBottomOf="@+id/ed_login_password" />
+        app:layout_constraintTop_toBottomOf="@+id/ed_login_password"
+        tools:alpha="1"
+        tools:ignore="VisualLintButtonSize" />
 
     <Button
         android:id="@+id/btn_register"
+        style="@style/Widget.MaterialComponents.Button.OutlinedButton"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
+        android:layout_height="56dp"
+        android:layout_marginTop="8dp"
+        android:alpha="0"
         android:text="@string/register"
         app:layout_constraintEnd_toEndOf="@+id/btn_login"
         app:layout_constraintStart_toStartOf="@+id/btn_login"
-        app:layout_constraintTop_toBottomOf="@+id/btn_login" />
+        app:layout_constraintTop_toBottomOf="@+id/btn_login"
+        tools:alpha="1"
+        tools:ignore="VisualLintButtonSize" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

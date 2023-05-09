@@ -5,6 +5,6 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.asLiveData
 import com.robby.dicodingstory.core.domain.usecase.AuthUseCase
 
-class MainViewModel(private val authUseCase: AuthUseCase) : ViewModel() {
+class MainViewModel(authUseCase: AuthUseCase) : ViewModel() {
     val isLogin: LiveData<Boolean> = authUseCase.isLogin().asLiveData()
 }

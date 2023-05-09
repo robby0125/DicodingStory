@@ -3,6 +3,7 @@ package com.robby.dicodingstory.home.adapter
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.robby.dicodingstory.R
 import com.robby.dicodingstory.core.domain.model.Story
 import com.robby.dicodingstory.databinding.StoryItemBinding
 import com.robby.dicodingstory.utils.loadImageFromUrl
@@ -35,8 +36,10 @@ class ListStoryAdapter : RecyclerView.Adapter<ListStoryAdapter.ViewHolder>() {
         RecyclerView.ViewHolder(binding.root) {
         fun bind(story: Story) {
             with(binding) {
-                tvUserName.text = story.name
-                imgStory.loadImageFromUrl(story.photoUrl)
+                tvItemName.text = story.name
+                ivItemPhoto.loadImageFromUrl(story.photoUrl)
+                ivItemPhoto.contentDescription =
+                    root.resources.getString(R.string.picture_story_from, story.name)
 
                 root.setOnClickListener { onClick?.onStoryClick(story) }
             }
