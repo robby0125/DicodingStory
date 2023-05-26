@@ -33,4 +33,6 @@
     <string name="password_error_message">Password must be at least 8 characters long.</string>
     <string name="email_error_message">Please enter a valid email address.</string>
     <string name="name_error_message">Please enter a valid name.</string>
+    <string name="story_map">Story Map</string>
+    <string name="title_activity_story_map">StoryMapActivity</string>
 </resources>

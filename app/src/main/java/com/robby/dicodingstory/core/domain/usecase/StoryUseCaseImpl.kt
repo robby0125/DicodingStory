@@ -7,7 +7,8 @@ import kotlinx.coroutines.flow.Flow
 import java.io.File
 
 class StoryUseCaseImpl(private val storyRepository: StoryRepository) : StoryUseCase {
-    override fun getAllStories(): Flow<Resource<List<Story>>> = storyRepository.getAllStories()
+    override fun getAllStories(location: Int): Flow<Resource<List<Story>>> =
+        storyRepository.getAllStories(location)
 
     override fun getDetailStory(id: String): Flow<Resource<Story>> =
         storyRepository.getDetailStory(id)

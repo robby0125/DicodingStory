@@ -17,6 +17,7 @@ import com.robby.dicodingstory.core.utils.Resource
 import com.robby.dicodingstory.databinding.ActivityHomeBinding
 import com.robby.dicodingstory.detail.DetailActivity
 import com.robby.dicodingstory.home.adapter.ListStoryAdapter
+import com.robby.dicodingstory.storymap.StoryMapActivity
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class HomeActivity : AppCompatActivity(), ListStoryAdapter.OnStoryItemClickListener {
@@ -71,12 +72,21 @@ class HomeActivity : AppCompatActivity(), ListStoryAdapter.OnStoryItemClickListe
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        if (item.itemId == R.id.action_logout) {
-            showLogoutConfirmation()
-            return true
-        }
+        return when (item.itemId) {
+            R.id.action_story_map -> {
+                val storyMapIntent = Intent(this@HomeActivity, StoryMapActivity::class.java)
+                startActivity(storyMapIntent)
 
-        return false
+                true
+            }
+
+            R.id.action_logout -> {
+                showLogoutConfirmation()
+                true
+            }
+
+            else -> false
+        }
     }
 
     override fun onStoryClick(story: Story) {

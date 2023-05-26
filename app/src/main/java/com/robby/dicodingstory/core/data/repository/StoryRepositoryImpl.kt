@@ -20,12 +20,12 @@ class StoryRepositoryImpl(
     private val apiService: ApiService,
     private val sessionManager: SessionManager
 ) : StoryRepository {
-    override fun getAllStories(): Flow<Resource<List<Story>>> = flow {
+    override fun getAllStories(location: Int): Flow<Resource<List<Story>>> = flow {
         emit(Resource.Loading())
 
         try {
             val token = sessionManager.getUserToken().first()
-            val response = apiService.getAllStories("Bearer $token")
+            val response = apiService.getAllStories("Bearer $token", location)
 
             if (!response.error) {
                 val listStory = response.listStory.map { DataMapper.mapStoryResponseToModel(it) }
