@@ -4,6 +4,8 @@ import android.animation.AnimatorSet
 import android.animation.ObjectAnimator
 import android.content.Intent
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -33,7 +35,36 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener {
         binding.btnLogin.setOnClickListener(this)
         binding.btnRegister.setOnClickListener(this)
 
+        binding.edLoginEmail.addTextChangedListener(object : TextWatcher {
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+
+            }
+
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                setLoginButtonEnabled()
+            }
+
+            override fun afterTextChanged(s: Editable?) {
+
+            }
+        })
+
+        binding.edLoginPassword.addTextChangedListener(object : TextWatcher {
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+
+            }
+
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                setLoginButtonEnabled()
+            }
+
+            override fun afterTextChanged(s: Editable?) {
+
+            }
+        })
+
         playAnimation()
+        setLoginButtonEnabled()
     }
 
     override fun onClick(v: View) {
@@ -94,5 +125,17 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener {
             playSequentially(title, subtitle, email, password, login, register)
             start()
         }
+    }
+
+    private fun setLoginButtonEnabled() {
+        val emailHasError = binding.edLoginEmail.hasError
+        val emailIsEmpty = binding.edLoginEmail.text.toString().isEmpty()
+        val passwordHasError = binding.edLoginPassword.hasError
+        val passwordIsEmpty = binding.edLoginPassword.text.toString().isEmpty()
+
+        val emailValid = !emailHasError && !emailIsEmpty
+        val passwordValid = !passwordHasError && !passwordIsEmpty
+
+        binding.btnLogin.isEnabled = emailValid && passwordValid
     }
 }

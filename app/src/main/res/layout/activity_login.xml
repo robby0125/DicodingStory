@@ -77,27 +77,42 @@
         tools:alpha="1"
         tools:ignore="TextContrastCheck,VisualLintTextFieldSize" />
 
-    <Button
+    <!--    <Button-->
+    <!--        android:id="@+id/btn_login"-->
+    <!--        android:layout_width="0dp"-->
+    <!--        android:layout_height="48dp"-->
+    <!--        android:layout_marginTop="16dp"-->
+    <!--        android:alpha="0"-->
+    <!--        android:text="@string/login"-->
+    <!--        android:background="@drawable/my_button_background"-->
+    <!--        app:layout_constraintEnd_toEndOf="@+id/ed_login_password"-->
+    <!--        app:layout_constraintStart_toStartOf="@+id/ed_login_password"-->
+    <!--        app:layout_constraintTop_toBottomOf="@+id/ed_login_password"-->
+    <!--        tools:alpha="1"-->
+    <!--        tools:ignore="VisualLintButtonSize" />-->
+
+    <com.robby.dicodingstory.customview.MyButton
         android:id="@+id/btn_login"
         android:layout_width="0dp"
-        android:layout_height="56dp"
+        android:layout_height="48dp"
         android:layout_marginTop="16dp"
         android:alpha="0"
         android:text="@string/login"
+        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="@+id/ed_login_password"
         app:layout_constraintStart_toStartOf="@+id/ed_login_password"
         app:layout_constraintTop_toBottomOf="@+id/ed_login_password"
-        tools:alpha="1"
-        tools:ignore="VisualLintButtonSize" />
+        tools:alpha="1" />
 
-    <Button
+    <com.robby.dicodingstory.customview.MyButton
         android:id="@+id/btn_register"
-        style="@style/Widget.MaterialComponents.Button.OutlinedButton"
         android:layout_width="0dp"
-        android:layout_height="56dp"
+        android:layout_height="48dp"
         android:layout_marginTop="8dp"
         android:alpha="0"
         android:text="@string/register"
+        android:textStyle="bold"
+        app:isSecondary="true"
         app:layout_constraintEnd_toEndOf="@+id/btn_login"
         app:layout_constraintStart_toStartOf="@+id/btn_login"
         app:layout_constraintTop_toBottomOf="@+id/btn_login"

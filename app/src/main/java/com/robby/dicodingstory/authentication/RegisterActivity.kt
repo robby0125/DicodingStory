@@ -4,6 +4,8 @@ import android.animation.AnimatorSet
 import android.animation.ObjectAnimator
 import android.content.Intent
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -62,7 +64,50 @@ class RegisterActivity : AppCompatActivity() {
             }
         }
 
+        binding.edRegisterName.addTextChangedListener(object : TextWatcher {
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+
+            }
+
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                setRegisterButtonEnabled()
+            }
+
+            override fun afterTextChanged(s: Editable?) {
+
+            }
+        })
+
+        binding.edRegisterEmail.addTextChangedListener(object : TextWatcher {
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+
+            }
+
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                setRegisterButtonEnabled()
+            }
+
+            override fun afterTextChanged(s: Editable?) {
+
+            }
+        })
+
+        binding.edRegisterPassword.addTextChangedListener(object : TextWatcher {
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+
+            }
+
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                setRegisterButtonEnabled()
+            }
+
+            override fun afterTextChanged(s: Editable?) {
+
+            }
+        })
+
         playAnimation()
+        setRegisterButtonEnabled()
     }
 
     private fun login(email: String, password: String) {
@@ -92,5 +137,20 @@ class RegisterActivity : AppCompatActivity() {
             playSequentially(title, name, email, password, register)
             start()
         }
+    }
+
+    private fun setRegisterButtonEnabled() {
+        val nameHasError = binding.edRegisterName.hasError
+        val nameIsEmpty = binding.edRegisterName.text.toString().isEmpty()
+        val emailHasError = binding.edRegisterEmail.hasError
+        val emailIsEmpty = binding.edRegisterEmail.text.toString().isEmpty()
+        val passwordHasError = binding.edRegisterPassword.hasError
+        val passwordIsEmpty = binding.edRegisterPassword.text.toString().isEmpty()
+
+        val nameValid = !nameHasError && !nameIsEmpty
+        val emailValid = !emailHasError && !emailIsEmpty
+        val passwordValid = !passwordHasError && !passwordIsEmpty
+
+        binding.btnRegister.isEnabled = nameValid && emailValid && passwordValid
     }
 }

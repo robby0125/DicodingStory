@@ -11,6 +11,11 @@ import androidx.appcompat.widget.AppCompatEditText
 import com.robby.dicodingstory.R
 
 class MyEditText : AppCompatEditText {
+    private var _hasError = false
+
+    val hasError: Boolean
+        get() = _hasError
+
     constructor(context: Context) : super(context) {
         init()
     }
@@ -47,20 +52,29 @@ class MyEditText : AppCompatEditText {
 
     private fun validatePassword(s: CharSequence) {
         if (s.length < MIN_PASSWORD_LENGTH) {
+            _hasError = true
             error = context.getString(R.string.password_error_message)
+        } else {
+            _hasError = false
         }
     }
 
     private fun validateEmail(s: CharSequence) {
         if (!Patterns.EMAIL_ADDRESS.matcher(s).matches()) {
+            _hasError = true
             error = context.getString(R.string.email_error_message)
+        } else {
+            _hasError = false
         }
     }
 
     private fun validatePersonName(s: CharSequence) {
         val namePattern = Regex("^[a-zA-Z-' ]{2,}\$")
         if (!namePattern.containsMatchIn(s)) {
+            _hasError = true
             error = context.getString(R.string.name_error_message)
+        } else {
+            _hasError = false
         }
     }
 

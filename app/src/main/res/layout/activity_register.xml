@@ -88,13 +88,14 @@
         tools:alpha="1"
         tools:ignore="TextContrastCheck,VisualLintTextFieldSize" />
 
-    <Button
+    <com.robby.dicodingstory.customview.MyButton
         android:id="@+id/btn_register"
         android:layout_width="0dp"
-        android:layout_height="56dp"
+        android:layout_height="48dp"
         android:layout_marginTop="16dp"
         android:alpha="0"
         android:text="@string/register"
+        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="@+id/ed_register_password"
         app:layout_constraintStart_toStartOf="@+id/ed_register_password"
         app:layout_constraintTop_toBottomOf="@+id/ed_register_password"
