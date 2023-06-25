@@ -1,8 +1,10 @@
 package com.robby.dicodingstory.storymap
 
+import android.content.res.Resources
 import android.os.Bundle
 import android.util.Log
 import android.view.MenuItem
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isVisible
 import com.google.android.gms.maps.CameraUpdateFactory
@@ -11,6 +13,7 @@ import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.LatLngBounds
+import com.google.android.gms.maps.model.MapStyleOptions
 import com.google.android.gms.maps.model.MarkerOptions
 import com.robby.dicodingstory.R
 import com.robby.dicodingstory.core.domain.model.Story
@@ -53,7 +56,8 @@ class StoryMapActivity : AppCompatActivity(), OnMapReadyCallback {
     override fun onMapReady(googleMap: GoogleMap) {
         mMap = googleMap
 
-        storyMapViewModel.getAllStoriesWithLatLng().observe(this) {
+        setMapStyle()
+        storyMapViewModel.getAllStoriesWithLocation().observe(this) {
             when (it) {
                 is Resource.Success -> {
                     setLoading(false)
@@ -62,14 +66,22 @@ class StoryMapActivity : AppCompatActivity(), OnMapReadyCallback {
 
                 is Resource.Loading -> setLoading(true)
 
-                is Resource.Error -> {}
+                is Resource.Error -> {
+                    setLoading(false)
+                    Toast.makeText(
+                        this,
+                        getString(R.string.error_loading_story_map),
+                        Toast.LENGTH_LONG
+                    ).show()
+                }
             }
         }
     }
 
     private fun provideStoryMarker(stories: List<Story>?) {
         if (stories.isNullOrEmpty()) {
-            Log.d("StoryMapActivity", "provideStoryMarker: empty or null list")
+            Toast.makeText(this, getString(R.string.no_story_with_location), Toast.LENGTH_SHORT)
+                .show()
         } else {
             stories.forEach { story ->
                 if (story.lat != null && story.lon != null) {
@@ -96,8 +108,25 @@ class StoryMapActivity : AppCompatActivity(), OnMapReadyCallback {
         }
     }
 
+    private fun setMapStyle() {
+        try {
+            val success =
+                mMap.setMapStyle(MapStyleOptions.loadRawResourceStyle(this, R.raw.map_style))
+
+            if (!success) {
+                Log.e(TAG, "Style parsing failed")
+            }
+        } catch (e: Resources.NotFoundException) {
+            Log.e(TAG, "Can't find map style. Error : $e")
+        }
+    }
+
     private fun setLoading(isLoading: Boolean) {
         binding.progressBar.isVisible = isLoading
         mapFragment.view?.isVisible = !isLoading
+    }
+
+    private companion object {
+        const val TAG = "StoryMapActivity"
     }
 }

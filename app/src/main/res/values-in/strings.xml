@@ -35,4 +35,12 @@
     <string name="email_error_message">Silakan masukkan alamat email yang valid.</string>
     <string name="name_error_message">Silakan masukkan nama yang valid.</string>
     <string name="story_map">Peta Cerita</string>
+    <string name="title_activity_story_map">StoryMapActivity</string>
+    <string name="timeout">Waktu Habis</string>
+    <string name="retry">Coba Lagi</string>
+    <string name="post_my_location">Posting lokasi saya</string>
+    <string name="location_denied">Gagal mendapatkan lokasi karena izin akses lokasi ditolak.</string>
+    <string name="location_not_found">Lokasi tidak ditemukan. Silakan coba lagi!</string>
+    <string name="no_story_with_location">Tidak ada cerita yang memiliki lokasi.</string>
+    <string name="error_loading_story_map">Terjadi kesalahan saat memuat cerita. Silakan coba lagi!</string>
 </resources>

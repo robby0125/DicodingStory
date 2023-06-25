@@ -4,11 +4,10 @@ import android.animation.AnimatorSet
 import android.animation.ObjectAnimator
 import android.content.Intent
 import android.os.Bundle
-import android.text.Editable
-import android.text.TextWatcher
 import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.widget.doOnTextChanged
 import com.robby.dicodingstory.R
 import com.robby.dicodingstory.core.utils.Resource
 import com.robby.dicodingstory.databinding.ActivityLoginBinding
@@ -35,33 +34,13 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener {
         binding.btnLogin.setOnClickListener(this)
         binding.btnRegister.setOnClickListener(this)
 
-        binding.edLoginEmail.addTextChangedListener(object : TextWatcher {
-            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+        binding.edLoginEmail.doOnTextChanged { _, _, _, _ ->
+            setLoginButtonEnabled()
+        }
 
-            }
-
-            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-                setLoginButtonEnabled()
-            }
-
-            override fun afterTextChanged(s: Editable?) {
-
-            }
-        })
-
-        binding.edLoginPassword.addTextChangedListener(object : TextWatcher {
-            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
-
-            }
-
-            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-                setLoginButtonEnabled()
-            }
-
-            override fun afterTextChanged(s: Editable?) {
-
-            }
-        })
+        binding.edLoginPassword.doOnTextChanged { _, _, _, _ ->
+            setLoginButtonEnabled()
+        }
 
         playAnimation()
         setLoginButtonEnabled()

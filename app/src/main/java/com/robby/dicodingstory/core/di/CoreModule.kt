@@ -1,7 +1,9 @@
 package com.robby.dicodingstory.core.di
 
-import com.robby.dicodingstory.core.data.ApiService
+import androidx.room.Room
 import com.robby.dicodingstory.core.data.SessionManager
+import com.robby.dicodingstory.core.data.local.db.StoryDatabase
+import com.robby.dicodingstory.core.data.remote.ApiService
 import com.robby.dicodingstory.core.data.repository.AuthRepositoryImpl
 import com.robby.dicodingstory.core.data.repository.StoryRepositoryImpl
 import com.robby.dicodingstory.core.domain.repository.AuthRepository
@@ -20,6 +22,19 @@ import retrofit2.converter.gson.GsonConverterFactory
 import java.util.concurrent.TimeUnit
 
 val dataModule = module {
+    factory { get<StoryDatabase>().storyDao() }
+
+    factory { get<StoryDatabase>().remoteKeysDao() }
+
+    single {
+        Room.databaseBuilder(
+            androidContext(),
+            StoryDatabase::class.java, "story_database"
+        )
+            .fallbackToDestructiveMigration()
+            .build()
+    }
+
     single {
         val loggingInterceptor =
             HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY)
@@ -44,7 +59,7 @@ val dataModule = module {
 
 val repositoryModule = module {
     single<AuthRepository> { AuthRepositoryImpl(get(), get()) }
-    single<StoryRepository> { StoryRepositoryImpl(get(), get()) }
+    single<StoryRepository> { StoryRepositoryImpl(get(), get(), get()) }
 }
 
 val useCaseModule = module {

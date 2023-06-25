@@ -1,10 +1,10 @@
-package com.robby.dicodingstory.core.data
+package com.robby.dicodingstory.core.data.remote
 
-import com.robby.dicodingstory.core.data.response.AddStoryResponse
-import com.robby.dicodingstory.core.data.response.AllStoriesResponse
-import com.robby.dicodingstory.core.data.response.DetailStoryResponse
-import com.robby.dicodingstory.core.data.response.LoginResponse
-import com.robby.dicodingstory.core.data.response.RegisterResponse
+import com.robby.dicodingstory.core.data.remote.response.AddStoryResponse
+import com.robby.dicodingstory.core.data.remote.response.AllStoriesResponse
+import com.robby.dicodingstory.core.data.remote.response.DetailStoryResponse
+import com.robby.dicodingstory.core.data.remote.response.LoginResponse
+import com.robby.dicodingstory.core.data.remote.response.RegisterResponse
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
 import retrofit2.http.Field
@@ -36,7 +36,9 @@ interface ApiService {
     @GET("stories")
     suspend fun getAllStories(
         @Header("Authorization") token: String,
-        @Query("location") location: Int
+        @Query("location") location: Int,
+        @Query("page") page: Int? = null,
+        @Query("size") size: Int? = null
     ): AllStoriesResponse
 
     @GET("stories/{id}")
@@ -50,6 +52,17 @@ interface ApiService {
     suspend fun addStory(
         @Header("Authorization") token: String,
         @Part photo: MultipartBody.Part,
-        @Part("description") description: RequestBody
+        @Part("description") description: RequestBody,
+        @Part("lat") latitude: Double? = null,
+        @Part("lon") longitude: Double? = null
+    ): AddStoryResponse
+
+    @Multipart
+    @POST("stories/guest")
+    suspend fun addStoryAsGuest(
+        @Part photo: MultipartBody.Part,
+        @Part("description") description: RequestBody,
+        @Part("lat") latitude: Double? = null,
+        @Part("lon") longitude: Double? = null
     ): AddStoryResponse
 }

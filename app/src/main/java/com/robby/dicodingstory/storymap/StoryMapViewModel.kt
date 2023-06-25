@@ -8,6 +8,6 @@ import com.robby.dicodingstory.core.domain.usecase.StoryUseCase
 import com.robby.dicodingstory.core.utils.Resource
 
 class StoryMapViewModel(private val storyUseCase: StoryUseCase) : ViewModel() {
-    fun getAllStoriesWithLatLng(): LiveData<Resource<List<Story>>> =
-        storyUseCase.getAllStories(location = 1).asLiveData()
+    fun getAllStoriesWithLocation(): LiveData<Resource<List<Story>>> =
+        storyUseCase.getAllStoriesWithLocation().asLiveData()
 }

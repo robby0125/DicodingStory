@@ -35,4 +35,11 @@
     <string name="name_error_message">Please enter a valid name.</string>
     <string name="story_map">Story Map</string>
     <string name="title_activity_story_map">StoryMapActivity</string>
+    <string name="timeout">Timeout</string>
+    <string name="retry">Retry</string>
+    <string name="post_my_location">Post my location</string>
+    <string name="location_denied">Failed to obtain location because location access permission was denied.</string>
+    <string name="location_not_found">Location is not found. Please try again!</string>
+    <string name="no_story_with_location">There are no stories that have a location.</string>
+    <string name="error_loading_story_map">An error occurred while loading stories. Please try again!</string>
 </resources>

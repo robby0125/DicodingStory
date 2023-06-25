@@ -1,4 +1,4 @@
-package com.robby.dicodingstory.core.data.response
+package com.robby.dicodingstory.core.data.remote.response
 
 import com.google.gson.annotations.SerializedName
 

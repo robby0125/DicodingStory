@@ -20,6 +20,7 @@ import androidx.core.content.ContextCompat
 import com.robby.dicodingstory.R
 import com.robby.dicodingstory.databinding.ActivityCameraBinding
 import com.robby.dicodingstory.fragment.LoadingDialogFragment
+import com.robby.dicodingstory.utils.EspressoIdlingResource
 import com.robby.dicodingstory.utils.Helper
 
 class CameraActivity : AppCompatActivity(), View.OnClickListener {
@@ -125,6 +126,8 @@ class CameraActivity : AppCompatActivity(), View.OnClickListener {
 
     private fun takePhoto() {
         imageCapture?.let {
+            EspressoIdlingResource.increment()
+
             val photoFile = Helper.createFile(application)
             val outputOptions = ImageCapture.OutputFileOptions.Builder(photoFile).build()
 
@@ -149,6 +152,8 @@ class CameraActivity : AppCompatActivity(), View.OnClickListener {
                         Log.d("Helper", "onImageSaved: ${reducedFile.length()}")
 
                         loadingDialog.dismiss()
+
+                        EspressoIdlingResource.decrement()
 
                         val intent = Intent(this@CameraActivity, AddStoryActivity::class.java)
                         intent.putExtra(AddStoryActivity.EXTRA_IMAGE, reducedFile)

@@ -38,15 +38,25 @@
         tools:ignore="ImageContrastCheck"
         tools:src="@tools:sample/backgrounds/scenic" />
 
+    <CheckBox
+        android:id="@+id/cb_post_location"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="@string/post_my_location"
+        app:layout_constraintEnd_toEndOf="@+id/ed_add_description"
+        app:layout_constraintStart_toStartOf="@+id/ed_add_description"
+        app:layout_constraintTop_toBottomOf="@+id/ed_add_description" />
+
     <Button
         android:id="@+id/button_add"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:text="@string/upload_story"
-        app:layout_constraintEnd_toEndOf="@+id/ed_add_description"
-        app:layout_constraintStart_toStartOf="@+id/ed_add_description"
-        app:layout_constraintTop_toBottomOf="@+id/ed_add_description"
+        app:layout_constraintEnd_toEndOf="@+id/cb_post_location"
+        app:layout_constraintStart_toStartOf="@+id/cb_post_location"
+        app:layout_constraintTop_toBottomOf="@+id/cb_post_location"
         tools:ignore="VisualLintButtonSize" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -2,20 +2,17 @@ package com.robby.dicodingstory.home.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.paging.PagingDataAdapter
+import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.robby.dicodingstory.R
 import com.robby.dicodingstory.core.domain.model.Story
 import com.robby.dicodingstory.databinding.StoryItemBinding
 import com.robby.dicodingstory.utils.loadImageFromUrl
 
-class ListStoryAdapter : RecyclerView.Adapter<ListStoryAdapter.ViewHolder>() {
-    private val listStory = ArrayList<Story>()
+class ListStoryAdapter :
+    PagingDataAdapter<Story, ListStoryAdapter.ViewHolder>(StoryDiffCallback()) {
     private var onClick: OnStoryItemClickListener? = null
-
-    fun setData(listStory: List<Story>) {
-        this.listStory.clear()
-        this.listStory.addAll(listStory)
-    }
 
     fun setOnStoryItemClickListener(onClick: OnStoryItemClickListener) {
         this.onClick = onClick
@@ -27,10 +24,9 @@ class ListStoryAdapter : RecyclerView.Adapter<ListStoryAdapter.ViewHolder>() {
     }
 
     override fun onBindViewHolder(holder: ListStoryAdapter.ViewHolder, position: Int) {
-        holder.bind(listStory[position])
+        val item = getItem(position)
+        item?.let { holder.bind(it) }
     }
-
-    override fun getItemCount(): Int = listStory.size
 
     inner class ViewHolder(private val binding: StoryItemBinding) :
         RecyclerView.ViewHolder(binding.root) {
@@ -43,6 +39,16 @@ class ListStoryAdapter : RecyclerView.Adapter<ListStoryAdapter.ViewHolder>() {
 
                 root.setOnClickListener { onClick?.onStoryClick(story) }
             }
+        }
+    }
+
+    private class StoryDiffCallback : DiffUtil.ItemCallback<Story>() {
+        override fun areItemsTheSame(oldItem: Story, newItem: Story): Boolean {
+            return oldItem.id == newItem.id
+        }
+
+        override fun areContentsTheSame(oldItem: Story, newItem: Story): Boolean {
+            return oldItem.name == newItem.name && oldItem.photoUrl == newItem.photoUrl
         }
     }
 

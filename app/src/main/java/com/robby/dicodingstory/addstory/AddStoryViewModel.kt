@@ -8,6 +8,11 @@ import com.robby.dicodingstory.core.utils.Resource
 import java.io.File
 
 class AddStoryViewModel(private val storyUseCase: StoryUseCase) : ViewModel() {
-    fun addStory(photo: File, description: String): LiveData<Resource<Boolean>> =
-        storyUseCase.addStory(photo, description).asLiveData()
+    fun addStory(
+        photo: File,
+        description: String,
+        lat: Double?,
+        lon: Double?
+    ): LiveData<Resource<Boolean>> =
+        storyUseCase.addStory(photo, description, lat, lon).asLiveData()
 }
